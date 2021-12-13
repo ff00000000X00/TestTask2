@@ -2,13 +2,17 @@
 #define MODEL_H
 
 #include <QObject>
+#include "objects.h"
+#include <memory>
+
 
 class Model : public QObject
 {
     Q_OBJECT
-
+private:
+    std::unique_ptr<BaseObject> modelObject;
 public:
-    Model(QWidget *parent = nullptr);
+    Model(QObject *parent = nullptr);
     ~Model();
 };
 #endif // MODEL_H
