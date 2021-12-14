@@ -1,9 +1,8 @@
 #include "model.h"
-#include "objects.h"
+#include "baseObject.h"
 
-std::map<QString,QString> b;
 
-BaseObject* a = new StrObject("asdas",b);
+
 
 #include <QApplication>
 
