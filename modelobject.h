@@ -13,10 +13,14 @@ private:
 public:
     ModelObject(const QString& eName);
 
-    void setValue(const QString& key,BasicObject* bo);
-    void setValue(const QString& key,QString strVal);
-    void setValue(const QString& key,bool   boolVal);
-    void setValue(const QString& key,double doubleVal);
+    void addValue(const QString& key,BasicObject* bo);
+    void addValue(const QString& key,const QString & strVal);
+    void addValue(const QString& key,const bool &   boolVal);
+    void addValue(const QString& key,const double & doubleVal);
+
+
+    QVariant data(const QString& key) const;
+    QVariant data(const int& key) const;
 
 };
 

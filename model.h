@@ -9,10 +9,10 @@ class Model : public QAbstractTableModel
 {
     Q_OBJECT   
 private:
-    using pObject = std::unique_ptr<ModelObject>;
-    QList<pObject> iModelObject;
+
+    QList<ModelObject*> iModelObject;
 public:
-    Model(const QList<pObject>& eModelObjects,QObject *parent = nullptr);
+    Model(QList<ModelObject*>& eModelObjects,QObject *parent = nullptr);
     ~Model();
 protected:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

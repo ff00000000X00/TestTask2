@@ -1,27 +1,25 @@
 #ifndef BASEOBJECT_H
 #define BASEOBJECT_H
 #include <QString>
+#include <QVariant>
 
-/*
- * Сначала хотел через полиморфизм, сделать базовый класс, наследовать классы для
- * строчных, логичесских и численных объектов, и везде воткнуть по мэпу,
- * потом через шаблоны, но когда выяснилось, что разные типы значнений должны
- * храниться в одном объекте, ничего лучше придумать не смог
- */
 
 class BasicObject
 {
+    QVariant baseValue;
 public:
-    BasicObject();
+    BasicObject(const QVariant& eVal);
+    virtual QVariant data();
+    virtual void setVal(const QVariant& eVal);
 };
 
 class StrObject:public BasicObject
 {
     QString iVal;
 public:
-    StrObject(const QString& eVal);
-    QString getVal();
-    void setVal(const QString& eVal);
+    StrObject(const QString& eVal);;
+    QVariant data() override;
+    void setVal(const QVariant& eVal) override;
 };
 
 class BoolObject:public BasicObject
@@ -29,8 +27,8 @@ class BoolObject:public BasicObject
     bool iVal;
 public:
     BoolObject(const bool& eVal);
-    bool getVal();
-    void setVal(const bool& eVal);
+    QVariant data() override;
+    void setVal(const QVariant& eVal) override;
 };
 
 class DoubleObject:public BasicObject
@@ -38,8 +36,8 @@ class DoubleObject:public BasicObject
     double iVal;
 public:
     DoubleObject(const double& eVal);
-    double getVal();
-    void setVal(const double& eVal);
+    QVariant data() override;
+    void setVal(const QVariant& eVal) override;
 };
 
 
