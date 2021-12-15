@@ -9,7 +9,7 @@ class Model : public QAbstractTableModel
 {
     Q_OBJECT   
 private:
-
+    mutable int i= -1;
     QList<ModelObject*> iModelObject;
 public:
     Model(QList<ModelObject*>& eModelObjects,QObject *parent = nullptr);

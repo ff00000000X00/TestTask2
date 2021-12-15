@@ -14,6 +14,15 @@ QString ModelObject::name()
     return objectName;
 }
 
+QString ModelObject::key(const int &key)
+{
+    if(key>=0 || key<=modObj.size())
+    {
+        return (modObj.begin()+key).key();
+    }
+    return QString();
+}
+
 QVariant ModelObject::data(const QString& key)
 {
    if(modObj.contains(key))

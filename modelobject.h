@@ -16,6 +16,7 @@ public:
     void addValue(const QString& key,const QVariant& val);
 
     QString name();
+    QString key(const int& key);
 
 
     QVariant data(const QString& key) ;

@@ -39,12 +39,13 @@ QVariant Model::data(const QModelIndex &index, int role) const
 
 QVariant Model::headerData(int section, Qt::Orientation orientation, int role) const
 {
-
-    if(role != Qt::DisplayRole)
-        return QVariant();
+  i++;
+    if(role != Qt::DisplayRole){
+        return QVariant();}
 
         return (orientation == Qt::Horizontal)?
-                    iModelObject.at(section)->name():QVariant();
+                    iModelObject.at(section)->name():
+                    iModelObject.at(i)->key(section);
 
 }
 
@@ -63,6 +64,8 @@ bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 
 Qt::ItemFlags Model::flags(const QModelIndex &index) const
 {
+    Qt::ItemFlags flags = QAbstractTableModel::flags(index);
+    return index.isValid()?(flags | Qt::ItemIsEditable):flags;
 
 }
 
