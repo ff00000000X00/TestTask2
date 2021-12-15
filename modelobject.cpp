@@ -4,45 +4,32 @@ ModelObject::ModelObject(const QString &eName)
     :objectName(eName)
 {}
 
-void ModelObject::addValue(const QString &key, BasicObject *bo)
+void ModelObject::addValue(const QString &key, const QVariant & val)
 {
-    modObj.insert(key,bo);
+    modObj.insert(key,val);
 }
 
-void ModelObject::addValue(const QString &key, const QString & strVal)
+QString ModelObject::name()
 {
-    BasicObject* baseVal = new StrObject(strVal);
-    addValue(key,baseVal);
+    return objectName;
 }
 
-void ModelObject::addValue(const QString &key, const bool &boolVal)
-{
-    BasicObject* baseVal = new BoolObject(boolVal);
-    addValue(key,baseVal);
-}
-
-void ModelObject::addValue(const QString &key, const double &doubleVal)
-{
-    BasicObject* baseVal = new DoubleObject(doubleVal);
-    addValue(key,baseVal);
-}
-
-QVariant ModelObject::data(const QString& key) const
+QVariant ModelObject::data(const QString& key)
 {
    if(modObj.contains(key))
    {
        auto val = modObj.find(key);
        if(val!=modObj.end())
-           return val.value()->data();
+           return val.value().data();
    }
    return QVariant();
 }
 
-QVariant ModelObject::data(const int &key) const
+QVariant ModelObject::data(const int &key)
 {
     if(key>=0 || key<=modObj.size())
     {
-        return (modObj.begin()+key).value()->data();
+        return (modObj.begin()+key).value().data();
     }
     return QVariant();
 }
