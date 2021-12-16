@@ -58,15 +58,12 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
 
 bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-
-
    if(index.isValid()&&role == Qt::EditRole)
     {
         iModelObject.at(index.column())->setData(keys.at(index.row()),value);
         emit dataChanged(index,index);
         return true;
     }
-
     return false;
 }
 
@@ -75,4 +72,22 @@ Qt::ItemFlags Model::flags(const QModelIndex &index) const
     Qt::ItemFlags flags = QAbstractTableModel::flags(index);
     return index.isValid()?(flags | Qt::ItemIsEditable):flags;
 
+}
+
+void Model::slotObjectToString(const QModelIndex &index)
+{
+    auto val = data(index, Qt::EditRole);
+    setData(index,val.toString(),Qt::EditRole);
+}
+
+void Model::slotObjectToDouble(const QModelIndex &index)
+{
+    auto val = data(index, Qt::EditRole);
+    setData(index,val.toDouble(),Qt::EditRole);
+}
+
+void Model::slotObjectToBool(const QModelIndex &index)
+{
+    auto val = data(index, Qt::EditRole);
+    setData(index,val.toBool(),Qt::EditRole);
 }
