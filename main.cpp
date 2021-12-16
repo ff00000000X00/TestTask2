@@ -15,18 +15,18 @@ int main(int argc, char *argv[])
     ModelObject* obj2 = new ModelObject("Object 2");
     list.append(obj2);
 
-    obj1->addValue("SKEY_1","SVAL_1");
-    obj1->addValue("SKEY_2","SVAL_2");
-    obj1->addValue("SKEY_3","SVAL_3");
-    obj1->addValue("SKEY_4","SVAL_4");
+    obj1->setData("SKEY_1","SVAL_1");
+    obj1->setData("SKEY_2","SVAL_2");
+    obj1->setData("SKEY_3","SVAL_3");
+    obj1->setData("SKEY_4","SVAL_4");
 
 
-    obj2->addValue("IVAL_1", 1.11);
-    obj2->addValue("IVAL_2", 2.22);
-    obj2->addValue("IVAL_3", 3.33);
-    obj2->addValue("IVAL_4", 4.44);
-    obj2->addValue("SKEY_4", 2.44);
-    obj2->addValue("SKEY_2", 5.44);
+    obj2->setData("IVAL_1", 1.11);
+    obj2->setData("IVAL_2", 2.22);
+    obj2->setData("IVAL_3", 3.33);
+    obj2->setData("IVAL_4", 4.44);
+    obj2->setData("SKEY_4", 2.44);
+    obj2->setData("SKEY_2", 5.44);
 
 
 

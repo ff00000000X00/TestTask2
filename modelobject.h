@@ -4,7 +4,6 @@
 #include <QVector>
 #include <QMap>
 
-
 class ModelObject
 {
 private:
@@ -17,8 +16,6 @@ public:
     QString key(const int& key) const noexcept;
     QList<QString> keys() const noexcept;
 
-
-    void addValue(const QString &key, const QVariant & val);
     void setData (const QString& key, const QVariant &val)noexcept;
     QVariant data(const QString& key) const noexcept;
     QVariant data(const int& key) const noexcept;

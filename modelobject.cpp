@@ -18,11 +18,6 @@ QString ModelObject::key(const int &key)const noexcept
     return QString();
 }
 
-void ModelObject::addValue(const QString &key, const QVariant & val)
-{
-    modObj.insert(key,val);
-}
-
 QList<QString> ModelObject::keys()const noexcept
 {
     return modObj.keys();
@@ -62,14 +57,3 @@ QVariant ModelObject::data(const int &key)const noexcept
     else
     return (modObj.begin()+key).value();
 }
-
-
-/*
-void ModelObject::setVal(const QVariant &eVal)
-{
-    baseValue = eVal;
-}
-*/
-
-
-
