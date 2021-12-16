@@ -1,9 +1,18 @@
 #include "model.h"
 
+void Model::setKeys()
+{
+    for(auto val:iModelObject)
+    {
+        keys<<val->keys();
+        keys.removeDuplicates();
+    }
+}
+
 Model::Model(QList<ModelObject*> &modelObjects, QObject *parent)
     :QAbstractTableModel(parent)
     ,iModelObject(modelObjects)
-{}
+{setKeys();}
 
 Model::~Model()
 {}
@@ -12,7 +21,7 @@ int Model::rowCount(const QModelIndex &parent) const
 {
     if(parent.isValid())
         return 0;
-    return 4;
+    return keys.size();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
@@ -32,29 +41,28 @@ QVariant Model::data(const QModelIndex &index, int role) const
         return QVariant();
     if (role == Qt::DisplayRole || role==Qt::EditRole)
     {
-       return iModelObject.at(index.column())->data(index.row());
+       return iModelObject.at(index.column())->data(keys.at(index.row()));
     }
     return QVariant();
 }
 
 QVariant Model::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  i++;
     if(role != Qt::DisplayRole){
         return QVariant();}
 
         return (orientation == Qt::Horizontal)?
                     iModelObject.at(section)->name():
-                    iModelObject.at(i)->key(section);
-
+                    keys.at(section);
 }
 
 bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 
-    if(index.isValid()&&role == Qt::EditRole)
+
+   if(index.isValid()&&role == Qt::EditRole)
     {
-        iModelObject.at(index.column())->data(index.row()).setValue(value);
+        iModelObject.at(index.column())->data(index.row()) = value;
         emit dataChanged(index,index);
         return true;
     }
@@ -68,24 +76,3 @@ Qt::ItemFlags Model::flags(const QModelIndex &index) const
     return index.isValid()?(flags | Qt::ItemIsEditable):flags;
 
 }
-
-bool Model::insertRows(int row, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::removeRows(int row, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::insertColumns(int column, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::removeColumns(int column, int count, const QModelIndex &parent)
-{
-
-}
-

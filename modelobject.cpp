@@ -23,26 +23,39 @@ QString ModelObject::key(const int &key)
     return QString();
 }
 
+QList<QString> ModelObject::keys()
+{
+    return modObj.keys();
+}
+
 QVariant ModelObject::data(const QString& key)
 {
    if(modObj.contains(key))
    {
        auto val = modObj.find(key);
        if(val!=modObj.end())
-           return val.value().data();
+           return val.value();
    }
    return QVariant();
 }
 
 QVariant ModelObject::data(const int &key)
 {
-    if(key>=0 || key<=modObj.size())
+    if(key<0 || key>=modObj.size())
     {
-        return (modObj.begin()+key).value().data();
+        return QVariant();
     }
-    return QVariant();
+    else
+    return (modObj.begin()+key).value();
 }
 
+
+/*
+void ModelObject::setVal(const QVariant &eVal)
+{
+    baseValue = eVal;
+}
+*/
 
 
 
