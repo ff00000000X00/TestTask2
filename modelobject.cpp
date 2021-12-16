@@ -4,17 +4,12 @@ ModelObject::ModelObject(const QString &eName)
     :objectName(eName)
 {}
 
-void ModelObject::addValue(const QString &key, const QVariant & val)
-{
-    modObj.insert(key,val);
-}
-
-QString ModelObject::name()
+QString ModelObject::name()const noexcept
 {
     return objectName;
 }
 
-QString ModelObject::key(const int &key)
+QString ModelObject::key(const int &key)const noexcept
 {
     if(key>=0 || key<=modObj.size())
     {
@@ -23,12 +18,27 @@ QString ModelObject::key(const int &key)
     return QString();
 }
 
-QList<QString> ModelObject::keys()
+void ModelObject::addValue(const QString &key, const QVariant & val)
+{
+    modObj.insert(key,val);
+}
+
+QList<QString> ModelObject::keys()const noexcept
 {
     return modObj.keys();
 }
 
-QVariant ModelObject::data(const QString& key)
+void ModelObject::setData(const QString &key, const QVariant& eVal) noexcept
+{
+    if(modObj.contains(key))
+    {
+        auto val = modObj.find(key);
+        if(val!=modObj.end())
+            val.value() = eVal;
+    }
+}
+
+QVariant ModelObject::data(const QString& key)const noexcept
 {
    if(modObj.contains(key))
    {
@@ -39,7 +49,7 @@ QVariant ModelObject::data(const QString& key)
    return QVariant();
 }
 
-QVariant ModelObject::data(const int &key)
+QVariant ModelObject::data(const int &key)const noexcept
 {
     if(key<0 || key>=modObj.size())
     {

@@ -13,17 +13,15 @@ private:
 public:
     ModelObject(const QString& eName);
 
-    void addValue(const QString& key,const QVariant& val);
-    //void setVal(const QVariant& eVal);
-
-    QString name();
-    QString key(const int& key);
-    QList<QString> keys();
+    QString name() const noexcept;
+    QString key(const int& key) const noexcept;
+    QList<QString> keys() const noexcept;
 
 
-
-    QVariant data(const QString& key) ;
-    QVariant data(const int& key) ;
+    void addValue(const QString &key, const QVariant & val);
+    void setData (const QString& key, const QVariant &val)noexcept;
+    QVariant data(const QString& key) const noexcept;
+    QVariant data(const int& key) const noexcept;
 
 };
 

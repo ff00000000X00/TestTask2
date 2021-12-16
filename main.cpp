@@ -3,11 +3,6 @@
 #include <QTableView>
 #include <QApplication>
 
-//ModelObject obj1("Object 1");
-//ModelObject obj2("Object 2");
-
-
-
 
 int main(int argc, char *argv[])
 {
@@ -31,6 +26,7 @@ int main(int argc, char *argv[])
     obj2->addValue("IVAL_3", 3.33);
     obj2->addValue("IVAL_4", 4.44);
     obj2->addValue("SKEY_4", 2.44);
+    obj2->addValue("SKEY_2", 5.44);
 
 
 

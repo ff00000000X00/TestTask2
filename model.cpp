@@ -62,7 +62,7 @@ bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 
    if(index.isValid()&&role == Qt::EditRole)
     {
-        iModelObject.at(index.column())->data(index.row()) = value;
+        iModelObject.at(index.column())->setData(keys.at(index.row()),value);
         emit dataChanged(index,index);
         return true;
     }
