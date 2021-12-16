@@ -36,6 +36,10 @@ void ModelObject::setData(const QString &key, const QVariant& eVal) noexcept
         if(val!=modObj.end())
             val.value() = eVal;
     }
+    else
+    {
+        modObj.insert(key,eVal);
+    }
 }
 
 QVariant ModelObject::data(const QString& key)const noexcept
