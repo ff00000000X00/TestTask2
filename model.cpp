@@ -1,5 +1,6 @@
 #include "model.h"
 
+
 void Model::setKeys()
 {
     for(auto val:iModelObject)
@@ -74,20 +75,31 @@ Qt::ItemFlags Model::flags(const QModelIndex &index) const
 
 }
 
-void Model::slotObjectToString(const QModelIndex &index)
+void Model::slotObjectToString(const QItemSelectionModel *model)
 {
-    auto val = data(index, Qt::EditRole);
-    setData(index,val.toString(),Qt::EditRole);
+    for (auto iVal:model->selectedIndexes())
+    {
+        auto val = data(iVal, Qt::EditRole);
+        setData(iVal,val.toString(),Qt::EditRole);
+    }
 }
 
-void Model::slotObjectToDouble(const QModelIndex &index)
+void Model::slotObjectToDouble(const QItemSelectionModel *model)
 {
-    auto val = data(index, Qt::EditRole);
-    setData(index,val.toDouble(),Qt::EditRole);
+    for (auto iVal:model->selectedIndexes())
+    {
+        auto val = data(iVal, Qt::EditRole);
+        setData(iVal,val.toDouble(),Qt::EditRole);
+    }
+
 }
 
-void Model::slotObjectToBool(const QModelIndex &index)
+void Model::slotObjectToBool(const QItemSelectionModel *model)
 {
-    auto val = data(index, Qt::EditRole);
-    setData(index,val.toBool(),Qt::EditRole);
+
+    for (auto iVal:model->selectedIndexes())
+    {
+        auto val = data(iVal, Qt::EditRole);
+        setData(iVal,val.toBool(),Qt::EditRole);
+    }
 }

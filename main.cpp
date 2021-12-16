@@ -40,10 +40,11 @@ int main(int argc, char *argv[])
     QMenu* cMenu = new QMenu("&Change format to");
     QMenuBar* mBar = new QMenuBar();
     mBar->addMenu(cMenu);
+    auto indexes = TV->selectionModel()->selectedIndexes();
 
-    cMenu->addAction("Q&String",[&mod, &TV](){mod->slotObjectToString(TV->currentIndex());});
-    cMenu->addAction("&Double",[&mod, &TV](){mod->slotObjectToDouble(TV->currentIndex());});
-    cMenu->addAction("&Bool",[&mod, &TV](){mod->slotObjectToBool(TV->currentIndex());});
+    cMenu->addAction("Q&String",[&mod, &TV](){mod->slotObjectToString(TV->selectionModel());});
+    cMenu->addAction("&Double",[&mod, &TV](){mod->slotObjectToDouble(TV->selectionModel());});
+    cMenu->addAction("&Bool",[&mod, &TV](){mod->slotObjectToBool(TV->selectionModel());});
 
     QVBoxLayout* box = new QVBoxLayout;
     box->addWidget(mBar);

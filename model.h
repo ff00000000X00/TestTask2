@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include <QAbstractTableModel>
+#include <QItemSelectionModel>
 #include "modelobject.h"
 
 class Model : public QAbstractTableModel
@@ -21,9 +22,9 @@ protected:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole)override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
 public slots:
-    void slotObjectToString(const QModelIndex& index);
-    void slotObjectToDouble(const QModelIndex& index);
-    void slotObjectToBool  (const QModelIndex& index);
+    void slotObjectToString(const QItemSelectionModel *model);
+    void slotObjectToDouble(const QItemSelectionModel *model);
+    void slotObjectToBool  (const QItemSelectionModel *model );
 
 };
 #endif // MODEL_H
