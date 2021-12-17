@@ -11,6 +11,7 @@ private:
     QList<ModelObject*> iModelObject;
     QList<QString> keys;
     void setKeys();
+    bool iTransposed = true;
 public:
     Model(QList<ModelObject*>& eModelObjects,QObject *parent = nullptr);
     ~Model();
@@ -25,6 +26,7 @@ public slots:
     void slotObjectToString(const QItemSelectionModel *model);
     void slotObjectToDouble(const QItemSelectionModel *model);
     void slotObjectToBool  (const QItemSelectionModel *model );
+    void slotTranspose     ();
 
 };
 #endif // MODEL_H

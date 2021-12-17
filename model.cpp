@@ -22,14 +22,20 @@ int Model::rowCount(const QModelIndex &parent) const
 {
     if(parent.isValid())
         return 0;
-    return keys.size();
+    if(iTransposed)
+        return keys.size();
+    else
+        return iModelObject.size();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
 {
     if(parent.isValid())
         return 0;
-    return iModelObject.size();
+    if(iTransposed)
+        return iModelObject.size();
+    else
+        return keys.size();
 }
 
 QVariant Model::data(const QModelIndex &index, int role) const
@@ -42,7 +48,10 @@ QVariant Model::data(const QModelIndex &index, int role) const
         return QVariant();
     if (role == Qt::DisplayRole || role==Qt::EditRole)
     {
-       return iModelObject.at(index.column())->data(keys.at(index.row()));
+        if(iTransposed)
+            return iModelObject.at(index.column())->data(keys.at(index.row()));
+        else
+            return iModelObject.at(index.row())->data(keys.at(index.column()));
     }
     return QVariant();
 }
@@ -52,9 +61,17 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
     if(role != Qt::DisplayRole){
         return QVariant();}
 
+    if(iTransposed){
         return (orientation == Qt::Horizontal)?
                     iModelObject.at(section)->name():
                     keys.at(section);
+        }
+    else
+    {
+        return (orientation == Qt::Vertical)?
+                    iModelObject.at(section)->name():
+                    keys.at(section);
+    }
 }
 
 bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -102,4 +119,11 @@ void Model::slotObjectToBool(const QItemSelectionModel *model)
         auto val = data(iVal, Qt::EditRole);
         setData(iVal,val.toBool(),Qt::EditRole);
     }
+}
+
+void Model::slotTranspose()
+{
+    iTransposed = !iTransposed;
+    this->headerDataChanged(Qt::Horizontal,0,iModelObject.size());
+    this->headerDataChanged(Qt::Vertical,0,keys.size());
 }
