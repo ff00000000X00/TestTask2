@@ -48,9 +48,9 @@ int main(int argc, char *argv[])
     mBar->setMaximumWidth(200);
     mBar->addMenu(cMenu);
 
-    cMenu->addAction("Q&String",[&mod, &TV](){mod->slotObjectToString(TV->selectionModel());});
-    cMenu->addAction("&Double",[&mod, &TV](){mod->slotObjectToDouble(TV->selectionModel());});
-    cMenu->addAction("&Bool",[&mod, &TV](){mod->slotObjectToBool(TV->selectionModel());});
+    cMenu->addAction("Q&String",[&mod, &TV](){mod->slotObjectToString(TV);});
+    cMenu->addAction("&Double",[&mod, &TV](){mod->slotObjectToDouble(TV);});
+    cMenu->addAction("&Bool",[&mod, &TV](){mod->slotObjectToBool(TV);});
 
     QVBoxLayout* Vbox = new QVBoxLayout;
     QHBoxLayout* HBox = new QHBoxLayout;

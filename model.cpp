@@ -78,9 +78,18 @@ bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 {
    if(index.isValid()&&role == Qt::EditRole)
     {
+       if(iTransposed)
+       {
         iModelObject.at(index.column())->setData(keys.at(index.row()),value);
         emit dataChanged(index,index);
         return true;
+       }
+       else
+       {
+           iModelObject.at(index.row())->setData(keys.at(index.column()),value);
+           emit dataChanged(index,index);
+           return true;
+       }
     }
     return false;
 }
@@ -92,18 +101,19 @@ Qt::ItemFlags Model::flags(const QModelIndex &index) const
 
 }
 
-void Model::slotObjectToString(const QItemSelectionModel *model)
+void Model::slotObjectToString(const QTableView *model)
 {
-    for (auto iVal:model->selectedIndexes())
+
+    for (auto iVal:model->selectionModel()->selectedIndexes())
     {
         auto val = data(iVal, Qt::EditRole);
         setData(iVal,val.toString(),Qt::EditRole);
     }
 }
 
-void Model::slotObjectToDouble(const QItemSelectionModel *model)
+void Model::slotObjectToDouble(const QTableView *model)
 {
-    for (auto iVal:model->selectedIndexes())
+    for (auto iVal:model->selectionModel()->selectedIndexes())
     {
         auto val = data(iVal, Qt::EditRole);
         setData(iVal,val.toDouble(),Qt::EditRole);
@@ -111,10 +121,10 @@ void Model::slotObjectToDouble(const QItemSelectionModel *model)
 
 }
 
-void Model::slotObjectToBool(const QItemSelectionModel *model)
+void Model::slotObjectToBool(const QTableView *model)
 {
 
-    for (auto iVal:model->selectedIndexes())
+    for (auto iVal:model->selectionModel()->selectedIndexes())
     {
         auto val = data(iVal, Qt::EditRole);
         setData(iVal,val.toBool(),Qt::EditRole);
